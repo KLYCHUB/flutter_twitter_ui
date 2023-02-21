@@ -34,8 +34,8 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               myScaffoldKey.currentState?.openDrawer();
             },
-            icon: Padding(
-              padding: const EdgeInsets.only(top: 5),
+            icon: const Padding(
+              padding: EdgeInsets.only(top: 5),
               child: CircleAvatar(
                   backgroundColor: Colors.transparent,
                   foregroundImage: AssetImage("assets/jpeg/ek.jpeg")),
@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         body: Column(
-          children: [
+          children: const [
             Divider(
               color: Color.fromARGB(110, 120, 144, 156),
             )
@@ -136,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
                                     children: [
-                                      CircleAvatar(
+                                      const CircleAvatar(
                                           backgroundColor: Colors.transparent,
                                           foregroundImage: AssetImage(
                                               "assets/jpeg/ek.jpeg")),
@@ -164,8 +164,8 @@ class _HomePageState extends State<HomePage> {
                                           ],
                                         ),
                                       ),
-                                      Spacer(),
-                                      Icon(
+                                      const Spacer(),
+                                      const Icon(
                                         Icons.verified,
                                         color: Colors.blue,
                                       )
@@ -182,15 +182,15 @@ class _HomePageState extends State<HomePage> {
                                           shape: MaterialStateProperty.all<
                                               RoundedRectangleBorder>(
                                             RoundedRectangleBorder(
-                                              side: BorderSide(
+                                              side: const BorderSide(
                                                   color: Colors.blueGrey),
                                               borderRadius:
                                                   BorderRadius.circular(20),
                                             ),
                                           ),
                                         ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
+                                        child: const Padding(
+                                          padding: EdgeInsets.all(8.0),
                                           child: Text('Yeni Hesap Oluştur',
                                               style: TextStyle(
                                                   color: Colors.black,
@@ -207,15 +207,15 @@ class _HomePageState extends State<HomePage> {
                                         shape: MaterialStateProperty.all<
                                             RoundedRectangleBorder>(
                                           RoundedRectangleBorder(
-                                            side: BorderSide(
+                                            side: const BorderSide(
                                                 color: Colors.blueGrey),
                                             borderRadius:
                                                 BorderRadius.circular(20),
                                           ),
                                         ),
                                       ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
+                                      child: const Padding(
+                                        padding: EdgeInsets.all(8.0),
                                         child: Text('Var Olan Hesabı Ekle',
                                             style: TextStyle(
                                                 color: Colors.black,
