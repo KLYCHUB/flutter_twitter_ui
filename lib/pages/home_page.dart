@@ -10,12 +10,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final lightTheme = ThemeData(
     brightness: Brightness.light,
-    // Diğer tema özellikleri
   );
 
   final darkTheme = ThemeData(
     brightness: Brightness.dark,
-    // Diğer tema özellikleri
   );
 
   bool isDarkMode = false;
@@ -36,23 +34,29 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               myScaffoldKey.currentState?.openDrawer();
             },
-            icon: const Padding(
-              padding: EdgeInsets.all(5.0),
+            icon: Padding(
+              padding: const EdgeInsets.only(top: 5),
               child: CircleAvatar(
                   backgroundColor: Colors.transparent,
                   foregroundImage: AssetImage("assets/jpeg/ek.jpeg")),
             ),
           ),
-          title: const Icon(
-            Icons.sunny,
-            color: Colors.blue,
+          title: Padding(
+            padding: const EdgeInsets.only(top: 5),
+            child: Image.asset(
+              "assets/jpeg/tw.jpeg",
+              height: 45,
+              color: Colors.blue,
+            ),
           ),
         ),
-        body: Column(children: [
-          Divider(
-            color: Colors.black,
-          )
-        ]),
+        body: Column(
+          children: [
+            Divider(
+              color: Color.fromARGB(110, 120, 144, 156),
+            )
+          ],
+        ),
         drawer: Drawer(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,45 +77,27 @@ class _HomePageState extends State<HomePage> {
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
                         child: Row(
-                          children: [
-                            Text("Eren KALAYCI",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
-                                    ?.copyWith(fontWeight: FontWeight.bold)),
-                            const Icon(
+                          children: const [
+                            _AccountName("Eren KALAYCI"),
+                            Icon(
                               Icons.lock,
                               size: 15,
                             ),
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 15),
-                        child: Text("@erenklyctr",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleSmall
-                                ?.copyWith(color: Colors.black54)),
+                      const Padding(
+                        padding: EdgeInsets.only(bottom: 15),
+                        child: _UserName("@enklyctr"),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: Row(
-                          children: [
-                            Text("28 ",
-                                style: Theme.of(context).textTheme.titleSmall),
-                            Text("Takip Edilen ",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleSmall
-                                    ?.copyWith(color: Colors.blueGrey[600])),
-                            Text("16 ",
-                                style: Theme.of(context).textTheme.titleSmall),
-                            Text("Takipçi",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleSmall
-                                    ?.copyWith(color: Colors.blueGrey[600])),
+                          children: const [
+                            _FollowFollowers("27 "),
+                            _UserName("Takip Edilen  "),
+                            _FollowFollowers("15 "),
+                            _UserName("Takipçi"),
                           ],
                         ),
                       ),
@@ -127,10 +113,117 @@ class _HomePageState extends State<HomePage> {
                           context: context,
                           builder: (context) => SizedBox(
                             height: MediaQuery.of(context).size.width / 1.5,
-                            child: const Center(
-                              child: Text(
-                                "Ne Aramıştınız...",
-                                textAlign: TextAlign.center,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 20),
+                                    child: Text(
+                                      "Hesaplar",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge
+                                          ?.copyWith(
+                                              fontWeight: FontWeight.w900),
+                                    ),
+                                  ),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      CircleAvatar(
+                                          backgroundColor: Colors.transparent,
+                                          foregroundImage: AssetImage(
+                                              "assets/jpeg/ek.jpeg")),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 20),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: const [
+                                                _AccountName("Eren KALAYCI"),
+                                                Icon(
+                                                  Icons.lock,
+                                                  size: 15,
+                                                ),
+                                              ],
+                                            ),
+                                            const Padding(
+                                              padding:
+                                                  EdgeInsets.only(bottom: 15),
+                                              child: _UserName("@enklyctr"),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      Icon(
+                                        Icons.verified,
+                                        color: Colors.blue,
+                                      )
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10),
+                                    child: SizedBox(
+                                      width: MediaQuery.of(context).size.width,
+                                      child: TextButton(
+                                        onPressed: () {},
+                                        style: ButtonStyle(
+                                          shape: MaterialStateProperty.all<
+                                              RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                              side: BorderSide(
+                                                  color: Colors.blueGrey),
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                            ),
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text('Yeni Hesap Oluştur',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 15)),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width,
+                                    child: TextButton(
+                                      onPressed: () {},
+                                      style: ButtonStyle(
+                                        shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                            side: BorderSide(
+                                                color: Colors.blueGrey),
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text('Var Olan Hesabı Ekle',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15)),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -145,18 +238,49 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                 child: Divider(color: Colors.black),
               ),
-              const _DraverMidButton(),
-              const _DraverMidButton(),
-              const _DraverMidButton(),
-              const _DraverMidButton(),
-              const _DraverMidButton(),
-              const _DraverMidButton(),
+              const _DraverMidButton(
+                "Profil",
+                Icon(
+                  Icons.person_2_outlined,
+                  size: 35,
+                ),
+              ),
+              const _DraverMidButton(
+                  "Konular",
+                  Icon(
+                    Icons.chat_outlined,
+                    size: 35,
+                  )),
+              const _DraverMidButton(
+                  "Yer İşaretleri",
+                  Icon(
+                    Icons.save_outlined,
+                    size: 35,
+                  )),
+              const _DraverMidButton(
+                  "Listeler",
+                  Icon(
+                    Icons.featured_play_list_outlined,
+                    size: 35,
+                  )),
+              const _DraverMidButton(
+                  "Twitter Çevresi",
+                  Icon(
+                    Icons.person_pin_circle_outlined,
+                    size: 35,
+                  )),
+              const _DraverMidButton(
+                  "Takipçi istekleri",
+                  Icon(
+                    Icons.person_add_alt,
+                    size: 35,
+                  )),
               const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30),
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                 child: Divider(color: Colors.black),
               ),
-              const _DrawerDropButton(),
-              const _DrawerDropButton(),
+              const _DrawerDropButton("Profesyonel Araçlar"),
+              const _DrawerDropButton("Ayarlar & Destek"),
               const Spacer(),
               const Spacer(),
               const Spacer(),
@@ -180,8 +304,58 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+class _UserName extends StatelessWidget {
+  const _UserName(
+    this.dropName,
+  );
+
+  final String dropName;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(dropName,
+        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+            fontWeight: FontWeight.bold, color: Theme.of(context).hintColor));
+  }
+}
+
+class _FollowFollowers extends StatelessWidget {
+  const _FollowFollowers(
+    this.dropName,
+  );
+
+  final String dropName;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(dropName,
+        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+            ));
+  }
+}
+
+class _AccountName extends StatelessWidget {
+  const _AccountName(
+    this.dropName,
+  );
+
+  final String dropName;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(dropName,
+        style: Theme.of(context)
+            .textTheme
+            .titleMedium
+            ?.copyWith(fontWeight: FontWeight.bold));
+  }
+}
+
 class _DrawerDropButton extends StatelessWidget {
-  const _DrawerDropButton();
+  const _DrawerDropButton(this.dropName);
+
+  final String dropName;
 
   @override
   Widget build(BuildContext context) {
@@ -192,7 +366,7 @@ class _DrawerDropButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("Drop Button",
+            Text(dropName,
                 style: Theme.of(context)
                     .textTheme
                     .titleMedium
@@ -201,7 +375,7 @@ class _DrawerDropButton extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: Icon(
                 Icons.keyboard_arrow_down_outlined,
-                size: 15,
+                size: 20,
               ),
             ),
           ],
@@ -212,7 +386,10 @@ class _DrawerDropButton extends StatelessWidget {
 }
 
 class _DraverMidButton extends StatelessWidget {
-  const _DraverMidButton();
+  const _DraverMidButton(this.buttonName, this.draverButton);
+
+  final String buttonName;
+  final Icon draverButton;
 
   @override
   Widget build(BuildContext context) {
@@ -221,11 +398,11 @@ class _DraverMidButton extends StatelessWidget {
         onTap: () {},
         child: Row(
           children: [
-            const Padding(
-              padding: EdgeInsets.only(left: 30, right: 10),
-              child: Icon(Icons.person_2_outlined, size: 30),
+            Padding(
+              padding: const EdgeInsets.only(left: 30, right: 10),
+              child: draverButton,
             ),
-            Text("Button",
+            Text(buttonName,
                 style: Theme.of(context)
                     .textTheme
                     .titleLarge
