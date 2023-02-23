@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                                     Colors.transparent)
                                 : null,
                           ),
-                          child: _AccountName("Sana Özel"),
+                          child: const _AccountName("Sana Özel"),
                         ),
                       ),
                       const SizedBox(width: 16),
@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                                     Colors.transparent)
                                 : null,
                           ),
-                          child: _AccountName("Takip Edilenler"),
+                          child: const _AccountName("Takip Edilenler"),
                         ),
                       ),
                     ],
@@ -310,9 +310,7 @@ class _HomePageState extends State<HomePage> {
 }
 
 class _ListView extends StatelessWidget {
-  const _ListView({
-    super.key,
-  });
+  const _ListView();
 
   @override
   Widget build(BuildContext context) {
@@ -391,8 +389,8 @@ class _ListView extends StatelessWidget {
                             "3Mn görüntülenme - Kimden Trabzonspor",
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10),
                           child: SizedBox(
                             width: 300,
                             child: _PostIcon(),
@@ -412,9 +410,7 @@ class _ListView extends StatelessWidget {
 }
 
 class _PostIcon extends StatelessWidget {
-  const _PostIcon({
-    super.key,
-  });
+  const _PostIcon();
 
   @override
   Widget build(BuildContext context) {
