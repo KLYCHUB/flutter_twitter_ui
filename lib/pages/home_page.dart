@@ -18,11 +18,16 @@ class _HomePageState extends State<HomePage> {
 
   bool isDarkMode = false;
 
+  int _selectedButton = 0;
+
+  int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> myScaffoldKey = GlobalKey<ScaffoldState>();
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: isDarkMode ? darkTheme : lightTheme,
       home: Scaffold(
         key: myScaffoldKey,
@@ -33,10 +38,92 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.transparent,
           leading: _IconButton(myScaffoldKey: myScaffoldKey),
         ),
-        body: Column(
-          children: [
-            _bodyDivider(),
-          ],
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: SafeArea(
+            child: Column(
+              children: [
+                _bodyDivider(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            setState(() {
+                              _selectedButton = 1;
+                            });
+                          },
+                          style: ButtonStyle(
+                            elevation: const MaterialStatePropertyAll(0),
+                            backgroundColor: _selectedButton == 1
+                                ? MaterialStateProperty.all<Color>(
+                                    Colors.transparent)
+                                : null,
+                          ),
+                          child: _AccountName("Sana Özel"),
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            setState(() {
+                              _selectedButton = 2;
+                            });
+                          },
+                          style: ButtonStyle(
+                            backgroundColor: _selectedButton == 2
+                                ? MaterialStateProperty.all<Color>(
+                                    Colors.transparent)
+                                : null,
+                          ),
+                          child: _AccountName("Takip Edilenler"),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: SizedBox(
+                    height: 2,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            color: _selectedButton == 1
+                                ? Colors.blue
+                                : Colors.transparent,
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Container(
+                            color: _selectedButton == 2
+                                ? Colors.blue
+                                : Colors.transparent,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                _bodyDivider(),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  child: PageView(
+                    scrollDirection: Axis.horizontal,
+                    children: const <Widget>[
+                      _ListView(),
+                      _ListView(),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
         drawer: SafeArea(
           child: Drawer(
@@ -61,17 +148,17 @@ class _HomePageState extends State<HomePage> {
                 ),
                 _drawerDivider(),
                 const _DrawerList(
-                    "Profil", Icon(Icons.person_2_outlined, size: 28)),
+                    "Profil", Icon(Icons.person_2_outlined, size: 26)),
                 const _DrawerList(
-                    "Konular", Icon(Icons.chat_outlined, size: 28)),
+                    "Konular", Icon(Icons.chat_outlined, size: 26)),
                 const _DrawerList(
-                    "Yer İşaretleri", Icon(Icons.save_outlined, size: 28)),
+                    "Yer İşaretleri", Icon(Icons.save_outlined, size: 26)),
                 const _DrawerList("Listeler",
-                    Icon(Icons.featured_play_list_outlined, size: 28)),
+                    Icon(Icons.featured_play_list_outlined, size: 26)),
                 const _DrawerList("Twitter Çevresi",
-                    Icon(Icons.person_search_outlined, size: 28)),
+                    Icon(Icons.person_search_outlined, size: 26)),
                 const _DrawerList(
-                    "Takipçi istekleri", Icon(Icons.person_add_alt, size: 28)),
+                    "Takipçi istekleri", Icon(Icons.person_add_alt, size: 26)),
                 _drawerDivider(),
                 const _DrawerDropButton("Profesyonel Araçlar"),
                 const _DrawerDropButton("Ayarlar & Destek"),
@@ -80,6 +167,60 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          elevation: 0,
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: BottomNavBarColor().black,
+          unselectedItemColor: BottomNavBarColor().grey,
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          items: const [
+            BottomNavigationBarItem(
+              icon: Padding(
+                padding: EdgeInsets.only(top: 20),
+                child: Icon(
+                  Icons.home,
+                  size: 25,
+                ),
+              ),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Padding(
+                padding: EdgeInsets.only(top: 20),
+                child: Icon(
+                  Icons.search,
+                  size: 25,
+                ),
+              ),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Padding(
+                padding: EdgeInsets.only(top: 20),
+                child: Icon(
+                  Icons.notifications_none_outlined,
+                  size: 25,
+                ),
+              ),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Padding(
+                padding: EdgeInsets.only(top: 20),
+                child: Icon(
+                  Icons.mail,
+                  size: 25,
+                ),
+              ),
+              label: '',
+            ),
+          ],
         ),
       ),
     );
@@ -90,7 +231,7 @@ class _HomePageState extends State<HomePage> {
   Padding _drawerDivider() {
     return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-      child: Divider(color: Colors.black),
+      child: Divider(color: Color.fromARGB(169, 61, 61, 61)),
     );
   }
 
@@ -116,7 +257,7 @@ class _HomePageState extends State<HomePage> {
       padding: const EdgeInsets.only(bottom: 10),
       child: Row(
         children: const [
-          _FollowFollowers("27 "),
+          _FollowFollowers("28 "),
           _UserName("Takip Edilen  "),
           _FollowFollowers("15 "),
           _UserName("Takipçi"),
@@ -127,7 +268,7 @@ class _HomePageState extends State<HomePage> {
 
   Padding _userAccountName() {
     return const Padding(
-      padding: EdgeInsets.only(bottom: 15),
+      padding: EdgeInsets.only(bottom: 15, top: 2),
       child: _UserName("@erenklyctr"),
     );
   }
@@ -164,6 +305,143 @@ class _HomePageState extends State<HomePage> {
         height: 35,
         color: Colors.blue,
       ),
+    );
+  }
+}
+
+class _ListView extends StatelessWidget {
+  const _ListView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      physics: const BouncingScrollPhysics(),
+      scrollDirection: Axis.vertical,
+      itemBuilder: (context, index) {
+        return SizedBox(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 40, bottom: 5),
+                      child: Icon(
+                        Icons.person,
+                        size: 20,
+                        color: Theme.of(context).hintColor,
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 5,
+                        horizontal: 5,
+                      ),
+                      child: _UserName(
+                        "Flutter Takip Eddiyor",
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: CircleAvatar(
+                          backgroundColor: Colors.transparent,
+                          foregroundImage: AssetImage("assets/jpeg/ek.jpeg")),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: const [
+                            _AccountName("Eren KALAYCI "),
+                            _UserName("@enklyctr"),
+                            _UserName("  3 sa"),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 5),
+                          child: Column(
+                            children: const [Text("Selamun Aleyküm")],
+                          ),
+                        ),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: SizedBox(
+                            width: 300,
+                            height: 200,
+                            child: Image.asset(
+                              'assets/jpeg/ts.jpeg',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          child: _UserName(
+                            "3Mn görüntülenme - Kimden Trabzonspor",
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: SizedBox(
+                            width: 300,
+                            child: _PostIcon(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _PostIcon extends StatelessWidget {
+  const _PostIcon({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Icon(
+          Icons.chat_bubble_outline_rounded,
+          size: 20,
+          color: Theme.of(context).hintColor,
+        ),
+        Icon(
+          Icons.refresh_rounded,
+          size: 20,
+          color: Theme.of(context).hintColor,
+        ),
+        Icon(
+          Icons.heart_broken_outlined,
+          size: 20,
+          color: Theme.of(context).hintColor,
+        ),
+        Icon(
+          Icons.signal_cellular_alt_outlined,
+          size: 20,
+          color: Theme.of(context).hintColor,
+        ),
+      ],
     );
   }
 }
@@ -253,9 +531,7 @@ class _AccountAddLogin extends StatelessWidget {
                           ),
                           child: const Padding(
                             padding: EdgeInsets.all(8.0),
-                            child: Text('Yeni Hesap Oluştur',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 15)),
+                            child: _FollowFollowers("Yeni Hesap Oluştur"),
                           ),
                         ),
                       ),
@@ -275,9 +551,7 @@ class _AccountAddLogin extends StatelessWidget {
                         ),
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
-                          child: Text('Var Olan Hesabı Ekle',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 15)),
+                          child: _FollowFollowers("Var Olan Bir Hesabı Ekle"),
                         ),
                       ),
                     ),
@@ -328,7 +602,7 @@ class _UserName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(dropName,
         style: Theme.of(context).textTheme.titleSmall?.copyWith(
-            fontWeight: FontWeight.bold, color: Theme.of(context).hintColor));
+            color: Theme.of(context).hintColor, fontWeight: FontWeight.normal));
   }
 }
 
@@ -415,16 +689,24 @@ class _DrawerList extends StatelessWidget {
               padding: const EdgeInsets.only(left: 30, right: 10),
               child: draverButton,
             ),
-            Text(
-              buttonName,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Text(
+                buttonName,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 19,
+                    ),
+              ),
             ),
           ],
         ),
       ),
     );
   }
+}
+
+class BottomNavBarColor {
+  final Color grey = Colors.grey;
+  final Color black = Colors.black;
 }
