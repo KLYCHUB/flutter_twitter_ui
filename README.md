@@ -1,4 +1,4 @@
-<b><h1 align="center">Flutter Information App About Countries</h1></b>
+<b><h1 align="center">Flutter TWITTER UI</h1></b>
 
 <div class="photo-container" align="center">
   <img src="https://github.com/KLYCHUB/flutter_twitter_ui/blob/master/ss/1.jpg?raw=true" height="480",width="270">
